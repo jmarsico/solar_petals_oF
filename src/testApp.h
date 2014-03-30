@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "ofxGui.h"
 #include "Petal.h"
+#include "ofxOsc.h"
 
 class testApp : public ofBaseApp{
 
@@ -43,8 +44,13 @@ public:
 
     
     ofxPanel gui;
-    ofxIntSlider waitTime;
+    //ofxIntSlider waitTime;
     ofxToggle changeColor;
+    int waitTime;
+    
+    ofxOscReceiver receiver;
+    
+    
     
     
     

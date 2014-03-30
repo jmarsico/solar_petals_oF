@@ -70,11 +70,11 @@ void Petal::update()
     //logging for turnOn and turn Off
     if(prevState == false && state == true)
     {
-        ofLog() << "turnedOn";
+        //ofLog() << "turnedOn";
     }
     if(prevState == true && state == false)
     {
-        ofLog() << "turnedOFF";
+        //ofLog() << "turnedOFF";
     }
     
 }

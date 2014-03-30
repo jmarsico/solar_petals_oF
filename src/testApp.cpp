@@ -23,7 +23,7 @@ void testApp::setup(){
     //changeColor = false;
     
     gui.setup();
-    gui.add(waitTime.setup("rate", 0, 0, maxWait));
+    //gui.add(waitTime.setup("rate", 0, 0, maxWait));
     gui.add(changeColor.setup("show on", false));
     gui.setPosition(boxW+offset, 30+offset);
     
@@ -39,11 +39,31 @@ void testApp::setup(){
         petals[i].setWaitTime((int)ofRandom(200));
     }
     
+    receiver.setup(4444);
+    
 
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
+    
+    // check for waiting messages
+	while(receiver.hasWaitingMessages()){
+		// get the next message
+		ofxOscMessage m;
+		receiver.getNextMessage(&m);
+        
+		// check for mouse moved message
+		if(m.getAddress() == "/attention"){
+			// both the arguments are int32's
+			waitTime = (int)m.getArgAsFloat(0);
+            ofLog() << waitTime;
+            waitTime = ofMap(waitTime, 0, 100, 0, 2000);
+            
+		}
+    }
+
+    
     for(int i=0; i < petals.size(); i++)
     {
         petals[i].update();
